@@ -6,12 +6,17 @@ class RegistrationsController < Devise::RegistrationsController
             params[:sport_ids].each do |sport_id|
                 UserSport.create(user_id: current_user.id, sport_id: sport_id)
             end
-        end
-            # @usersport = UserSport.new()
-            # @usersport.user_id = resource.id
-            # # @usersport.sport_id = 
-            # @usersport.save
-        
+        end      
+    end
+
+    def update
+        super
+
+        if resource.save
+            params[:sport_ids].each do |sport_id|
+                UserSport.create(user_id: current_user.id, sport_id: sport_id)
+            end
+        end       
     end
 
     private

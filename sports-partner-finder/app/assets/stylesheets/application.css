@@ -6,21 +6,34 @@ html {
   box-sizing: inherit;
 }
 
-.sort-links {
+.circle-images {
     padding-bottom: 40px;
 }
-.sort-link {
+.circle-image {
   display: inline-block;
   position: relative;
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   overflow: hidden;
   border-radius: 50%;
 }
 
-.sort-link img {
+.circle-image img {
   width: auto;
   height: 100%;
   margin-left: -20px;
 }
 
+.circle-profile-image {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height:200px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.circle-profile-image img {
+  width: auto;
+  height: 100%;
+}

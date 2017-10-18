@@ -1,12 +1,12 @@
 <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
 <br>
 
-<div class='sort-links'>
+<div class='circle-images'>
   <h1>Sort by sport</h1>
-  <a class="sort-link" href="/users?sort=1">
+  <a class="circle-image" href="/users?sort=1">
     <img src="<%=Sport.find(1).image_url%>" alt="Tennis">
   </a> 
-  <a class="sort-link" href="/users?sort=2">
+  <a class="circle-image" href="/users?sort=2">
     <img src="<%=Sport.find(2).image_url%>" alt="Tennis">
   </a> 
 </div>
