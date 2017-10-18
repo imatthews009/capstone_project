@@ -1,0 +1,29 @@
+<%= link_to "Home Page", users_path %>
+<br>
+<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+<div class="row">
+    <div class="col">
+        <img src="<%=@user.profile_url%>" alt="">
+    </div>
+
+    <div class="col">
+        <h1>Username: <%=@user.username%></h1>
+    </div>
+
+    <div class="col">
+        <h1>city: <%=@user.city%></h1>
+    </div>
+
+    <div class="col">
+        <h1>E-mail: <%=@user.email%></h1>
+    </div>
+
+    <h1>Sports of interest:
+      <ul>
+        <% @user.sports.each do |sport| %>
+          <li><%=sport.name %></li>
+        <% end %>
+      </ul>
+    </h1>
+</div>
+

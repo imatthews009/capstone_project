@@ -1,0 +1,37 @@
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<br>
+
+<div class='sort-links'>
+  <h1>Sort by sport</h1>
+  <a class="sort-link" href="/users?sort=1">
+    <img src="<%=Sport.find(1).image_url%>" alt="Tennis">
+  </a> 
+  <a class="sort-link" href="/users?sort=2">
+    <img src="<%=Sport.find(2).image_url%>" alt="Tennis">
+  </a> 
+</div>
+
+
+
+<div class="users_index">
+  <% @users.each do |user|%>
+  <div class="row" onclick="javascript:location.href='users/<%=user.id%>'" style="border: 1px solid black;">
+    <div class="col-3">
+      <img src="<%=user.profile_url%>" alt="User Image" style="width:100px;"> 
+    </div>
+    <div class="col-6 user_information">
+      <h1>Username: <%=user.username %></h1>
+      <h1>City: <%=user.city %></h1>
+      <h1>E-mail: <%=user.email %></h1>
+      <h1>Sports:
+        <ul>
+          <% user.sports.each do |sport| %>
+            <li><%=sport.name %></li>
+          <% end %>
+        </ul>
+      </h1>
+    </div>
+  </div>
+  <% end %> 
+</div>
+

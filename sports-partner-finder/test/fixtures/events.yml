@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  image_url: MyString
+  beg_time: 2017-10-08 15:12:16
+  end_time: 2017-10-08 15:12:16
+  max_athletes: 1
+  location: MyString
+  user_id: 1
+  sport_id: 1
+
+two:
+  title: MyString
+  description: MyText
+  image_url: MyString
+  beg_time: 2017-10-08 15:12:16
+  end_time: 2017-10-08 15:12:16
+  max_athletes: 1
+  location: MyString
+  user_id: 1
+  sport_id: 1
