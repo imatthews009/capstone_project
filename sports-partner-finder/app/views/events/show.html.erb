@@ -1,0 +1,29 @@
+
+ 
+<div class="col-3">
+  <img src="<%=@event.image_url%>" alt="event Image" style="width:100px;"> 
+</div>
+<div class="col-6 event_information">
+  <h1>Title: <%=@event.title %></h1>
+  <h1>Description: <%=@event.description %></h1>
+  <h1>Start time: <%=@event.beg_time %></h1>
+  <h1>End time: <%=@event.end_time %></h1>
+  <h1>Maximum number of athletes: <%=@event.max_athletes %></h1>
+  <h1>Location: <%=@event.location %></h1>
+  <h1>Athletes Attending: 
+    <ol>
+    <%@event.users.each do |user| %>
+    
+        <li><%= user.username %></li>
+    
+    <% end %>
+    </ol>
+</h1>
+  
+</div>
+
+<%= link_to 'join', join_event_path(@event) %> <br>
+<%= link_to 'leave', leave_event_path(@event) %> <br>
+
+
+<%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you sure you would like to delete?"}%>

@@ -1,0 +1,48 @@
+<%= form_tag '/events', method: :post do %>
+    
+    <div>
+        <%= label_tag :title %> <br>
+        <%= text_field_tag :title, @event.title %>
+    </div>
+
+    <div>
+        <%= label_tag :description %> <br>
+        <%= text_area_tag :description, @event.description %>
+    </div>
+
+    <div>
+        <%= label_tag :event_image %> <br>
+        <%= text_field_tag :image_url, @event.image_url %>
+    </div>
+
+    <div>
+        <%= label_tag :event_send_time %> <br>
+        <%= text_field_tag :beg_time, @event.beg_time %>
+    </div>
+    
+    <div>
+        <%= label_tag :event_send_time %> <br>
+        <%= text_field_tag :end_time, @event.end_time %>
+    </div>
+
+    <div>
+        <%= label_tag :max_number_of_athletes %> <br>
+        <%= text_field_tag :max_athletes, @event.max_athletes %>
+    </div>
+
+    <div>
+        <%= label_tag :location %> <br>
+        <%= text_field_tag :location, @event.location %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :sports %><br />    
+      <%= select_tag(:sport_id, options_from_collection_for_select(Sport.all, :id, :name), :multiple => false) %>
+    </div>
+
+    <div>
+        <%= submit_tag %>
+    </div>
+
+    <br>
+<% end %>

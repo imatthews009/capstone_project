@@ -1,0 +1,28 @@
+<h1>Events</h1>
+
+<!-- <div class='circle-images'>
+  <h1>Sort by sport</h1>
+  <a class="circle-image" href="/events?sort=1">
+    <img src="<%=Sport.find(1).image_url%>" alt="Tennis">
+  </a> 
+  <a class="circle-image" href="/users?sort=2">
+    <img src="<%=Sport.find(2).image_url%>" alt="Tennis">
+  </a> 
+</div> -->
+
+<% @events.each do |event| %>
+  <div class="row" onclick="javascript:location.href='/events/<%=event.id%>'" style="border: 1px solid black;">
+    <div class="col-3">
+      <img src="<%=event.image_url%>" alt="event Image" style="width:100px;"> 
+    </div>
+    <div class="col-6 event_information">
+      <h1>Title: <%=event.title %></h1>
+      <h1>Description: <%=event.description %></h1>
+      <h1>Start time: <%=event.beg_time %></h1>
+      <h1>End time: <%=event.end_time %></h1>
+      <h1>Maximum number of athletes: <%=event.max_athletes %></h1>
+      <h1>Location: <%=event.location %></h1>
+      
+    </div>
+  </div>
+<% end %>
