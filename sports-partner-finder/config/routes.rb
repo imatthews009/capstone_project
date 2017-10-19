@@ -9,5 +9,15 @@ Rails.application.routes.draw do
   end
   resources :user_events, only: [:destroy]
 
+  unauthenticated :user do
+    devise_scope :user do
+      get "/" => "devise/sessions#new"
+    end
+  end
+
+  resources :conversations do
+    resources :messages
+  end
+
   root "users#index"
 end

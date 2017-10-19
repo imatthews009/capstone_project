@@ -9,4 +9,5 @@ class User < ApplicationRecord
     # rename to created_events and attended events through user_events
     has_many :attended_events, through: :user_events, source: :event
     has_many :events #attended events
+    has_many :conversations, :foreign_key => :sender_id
 end

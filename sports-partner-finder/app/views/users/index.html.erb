@@ -14,10 +14,10 @@
 
 
 <div class="users_index">
-  <% @users.each do |user|%>
-  <div class="row" onclick="javascript:location.href='users/<%=user.id%>'" style="border: 1px solid black;">
+  <% @users.each_with_index do |user, index|%>
+  <div class="row"  style="border: 1px solid black;">
     <div class="col-3">
-      <img src="<%=user.profile_url%>" alt="User Image" style="width:100px;"> 
+      <img src="<%=user.profile_url%>" onclick="javascript:location.href='users/<%=user.id%>'" alt="User Image" style="width:100px;"> 
     </div>
     <div class="col-6 user_information">
       <h1>Username: <%=user.username %></h1>
@@ -30,6 +30,14 @@
           <% end %>
         </ul>
       </h1>
+      <tr>
+            <td><%= index +=1 %></td>
+            <td><%= user.username %></td>
+            <td>
+              <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
+                          "data-sid" => current_user.id, "data-rip" => user.id %>
+            </td>
+          </tr>
     </div>
   </div>
   <% end %> 
