@@ -14,9 +14,11 @@
         <%= link_to "Ian Matthews", root_path, class: "name" %> 
 
         <nav>
+             
+            <% if user_signed_in? %>   
             <%= link_to "Home", root_path %>              
             <%= link_to "Events", events_path  %>              
-            <% if user_signed_in? %>            
+            <%= link_to "Chats", '/users/' + current_user.id.to_s + '/chats'  %>          
               <%= link_to "Sign Out", destroy_user_session_path, method: :delete  %>  
             <% end %>    
 

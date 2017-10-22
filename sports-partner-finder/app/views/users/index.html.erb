@@ -15,23 +15,31 @@
 
 <div class="users_index">
   <% @users.each do |user|%>
-  <div class="row" onclick="javascript:location.href='users/<%=user.id%>'" style="border: 1px solid black;">
+  <% if user.id != current_user.id %>
+  <div class="row" style="border: 1px solid black;">
     <div class="col-3">
-      <img src="<%=user.profile_url%>" alt="User Image" style="width:100px;"> 
+      <img onclick="javascript:location.href='users/<%=user.id%>'" src="<%=user.profile_url%>" alt="User Image" style="width:100px;"> 
     </div>
-    <div class="col-6 user_information">
-      <h1>Username: <%=user.username %></h1>
-      <h1>City: <%=user.city %></h1>
-      <h1>E-mail: <%=user.email %></h1>
-      <h1>Sports:
-        <ul>
-          <% user.sports.each do |sport| %>
-            <li><%=sport.name %></li>
-          <% end %>
-        </ul>
-      </h1>
+    <div class="col-6 user_information">      
+        <h1>Username: <%=user.username %></h1>
+        <h1>City: <%=user.city %></h1>
+        <h1>E-mail: <%=user.email %></h1>
+        <h1>Sports:
+          <ul>
+            <% user.sports.each do |sport| %>
+              <li><%=sport.name %></li>
+            <% end %>
+          </ul>
+        </h1>
+        <h1>
+            Chat with: 
+            <%= button_to(user_chats_path(current_user, :user => user.id), method: :post) do %>
+            <%= user.username %>
+            <% end %>
+        </h1>     
     </div>
   </div>
+  <% end %>
   <% end %> 
 </div>
 

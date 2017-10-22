@@ -1,10 +1,11 @@
+Current Chats:
 <ul>
  <% if @existing_chats_users %>
-   <% @existing_chats_users.each do |other_user| %>
-    <% if other_user != current_user %>
+   <% @existing_chats_users.each do |user| %>
+    <% if user != current_user %>
       <li>
-        <%= link_to(user_chats_path(current_user, :other_user => other_user.id), method: :post) do %>
-        <%= other_user.username %>
+        <%= link_to(user_chats_path(current_user, :user => user.id), method: :post) do %>
+        <%= user.username %>
         <% end %>
       </li>
      <% end %>
@@ -13,11 +14,11 @@
 </ul>
 All Users:
 <ul>
-  <% User.all.each do |other_user| %>
-   <% if other_user != current_user %>
+  <% User.all.each do |user| %>
+   <% if user != current_user %>
      <li>
-       <%= link_to(user_chats_path(current_user, :other_user => other_user.id), method: :post) do %>
-       <%= other_user.username %>
+       <%= link_to(user_chats_path(current_user, :user => user.id), method: :post) do %>
+       <%= user.username %>
        <% end %>
      </li>
     <% end %>
