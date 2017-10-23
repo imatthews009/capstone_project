@@ -22,8 +22,8 @@
   
 </div>
 
-<%= link_to 'join', join_event_path(@event) %> <br>
-<%= link_to 'leave', leave_event_path(@event) %> <br>
+<%= button_to 'join', join_event_path(@event) %> <br>
+<%= button_to 'leave', leave_event_path(@event) %> <br>
 
 
 <%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you sure you would like to delete?"}%>

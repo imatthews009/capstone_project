@@ -3,13 +3,15 @@
 
 <div class='circle-images'>
   <h1>Sort by sport</h1>
-  <a class="circle-image" href="/users?sort=1">
-    <img src="<%=Sport.find(1).image_url%>" alt="Tennis">
-  </a> 
-  <a class="circle-image" href="/users?sort=2">
-    <img src="<%=Sport.find(2).image_url%>" alt="Tennis">
-  </a> 
+  <% Sport.all.each do |sport| %>
+    <a class="circle-image" href="/users?sort=<%=sport.id%>">
+      <img src="<%=sport.image_url%>" alt="sport.name">
+    </a> 
+  <% end %>
+  <%= link_to 'Reset', root_path %>
 </div>
+
+
 
 
 
@@ -31,9 +33,8 @@
             <% end %>
           </ul>
         </h1>
-        <h1>
-            Chat with: 
-            <%= button_to(user_chats_path(current_user, :user => user.id), method: :post) do %>
+        <h1> 
+            Chat with: <%= button_to(user_chats_path(current_user, :user => user.id), method: :post) do %>
             <%= user.username %>
             <% end %>
         </h1>     

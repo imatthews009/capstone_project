@@ -3,6 +3,11 @@ class EventsController < ApplicationController
 
     def index
         @events = Event.all
+        sort_att = params[:sort]
+        if sort_att
+            sport = Sport.all.find(params[:sort])
+            @events = sport.events
+        end
     end
 
     def new

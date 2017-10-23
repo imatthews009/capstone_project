@@ -1,14 +1,16 @@
 <h1>Events</h1>
 
-<!-- <div class='circle-images'>
+<%= link_to "Create new event", '/events/new' %>
+
+<div class='circle-images'>
   <h1>Sort by sport</h1>
-  <a class="circle-image" href="/events?sort=1">
-    <img src="<%=Sport.find(1).image_url%>" alt="Tennis">
-  </a> 
-  <a class="circle-image" href="/users?sort=2">
-    <img src="<%=Sport.find(2).image_url%>" alt="Tennis">
-  </a> 
-</div> -->
+  <% Sport.all.each do |sport| %>
+    <a class="circle-image" href="/events?sort=<%=sport.id%>">
+      <img src="<%=sport.image_url%>" alt="sport.name">
+    </a> 
+  <% end %>
+  <%= link_to 'Reset', '/events' %>
+</div>
 
 <% @events.each do |event| %>
   <div class="row" onclick="javascript:location.href='/events/<%=event.id%>'" style="border: 1px solid black;">
@@ -21,7 +23,14 @@
       <h1>Start time: <%=event.beg_time %></h1>
       <h1>End time: <%=event.end_time %></h1>
       <h1>Maximum number of athletes: <%=event.max_athletes %></h1>
+      <h2>Number of athletes attending</h2>
+      <ul>
+        <li><%= event.users.count%> / <%= event.max_athletes%></li>
+      </ul>
       <h1>Location: <%=event.location %></h1>
+
+      <h1>Sport: <%=event.sport.name %></h1>
+
       
     </div>
   </div>

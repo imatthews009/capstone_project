@@ -11,11 +11,12 @@
 
   <body>
     <header id="main_navigation" class="clearfix">
-        <%= link_to "Ian Matthews", root_path, class: "name" %> 
+     
 
         <nav>
              
             <% if user_signed_in? %>   
+            <%= link_to current_user.username, '/users/' + current_user.id.to_s %> 
             <%= link_to "Home", root_path %>              
             <%= link_to "Events", events_path  %>              
             <%= link_to "Chats", '/users/' + current_user.id.to_s + '/chats'  %>          
