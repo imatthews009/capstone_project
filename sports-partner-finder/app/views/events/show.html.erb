@@ -8,8 +8,8 @@
 <div class="col-6 event_information">
   <h1>Title: <%=@event.title %></h1>
   <h1>Description: <%=@event.description %></h1>
-  <h1>Start time: <%=@event.beg_time %></h1>
-  <h1>End time: <%=@event.end_time %></h1>
+  <h1>Start time: <%=@event.beg_time.strftime('%A, %d %b %Y %l:%M %p') %></h1>
+  <h1>End time: <%=@event.end_time.strftime('%A, %d %b %Y %l:%M %p') %></h1>
   <h1>Maximum number of athletes: <%=@event.max_athletes %></h1>
   <h1>Location name: <%=@event.location %></h1>
 

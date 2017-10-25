@@ -16,13 +16,13 @@
     </div>
 
     <div>
-        <%= label_tag :event_send_time %> <br>
-        <%= text_field_tag :beg_time, @event.beg_time %>
+        <%= label_tag :event_end_time %> <br>
+        <%= datetime_select(:beg_date, :beg_time) %>
     </div>
     
     <div>
-        <%= label_tag :event_send_time %> <br>
-        <%= text_field_tag :end_time, @event.end_time %>
+        <%= label_tag :event_end_time %> <br>
+        <%= datetime_select(:end_date, :end_time) %>
     </div>
 
     <div>
