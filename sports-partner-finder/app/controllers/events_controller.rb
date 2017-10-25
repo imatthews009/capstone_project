@@ -25,7 +25,9 @@ class EventsController < ApplicationController
             end_time: params[:end_time], 
             max_athletes: params[:max_athletes], 
             latitude: coordinates[0], 
-            longitude: coordinates[1],  
+            longitude: coordinates[1],
+            location: params[:location], 
+            address: params[:address], 
             sport_id: params[:sport_id], 
             user_id: current_user.id)
  
@@ -74,6 +76,8 @@ class EventsController < ApplicationController
             max_athletes: params[:max_athletes], 
             latitude: coordinates[0], 
             longitude: coordinates[1],
+            location: params[:location],
+            address: params[:address],
             sport_id: params[:sport_id], 
             user_id: current_user.id
             )

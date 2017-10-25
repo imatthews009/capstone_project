@@ -31,8 +31,13 @@
     </div>
 
     <div>
+        <%= label_tag :location_name %> <br>
+        <%= text_field_tag :location, @event.location %>
+    </div>
+
+    <div>
         <%= label_tag :address %> <br>
-        <%= text_field_tag :address %>
+        <%= text_field_tag :address, @event.address %>
     </div>
 
     <div class="field">
