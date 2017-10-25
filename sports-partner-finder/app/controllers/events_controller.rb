@@ -33,13 +33,15 @@ class EventsController < ApplicationController
         if new_event.save
             redirect_to new_event
         else
-            p new_event.errors.full_messages
-
             render 'new'
         end
     end
 
     def show
+        @hash = Gmaps4rails.build_markers(@event) do |event, marker|
+          marker.lat event.latitude
+          marker.lng event.longitude
+        end
     end
 
     def join
