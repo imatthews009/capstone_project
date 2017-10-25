@@ -15,7 +15,19 @@ class EventsController < ApplicationController
     end
 
     def create
-        new_event = Event.create(title: params[:title], description: params[:description], image_url: params[:image_url], beg_time: params[:beg_time], end_time: params[:end_time], max_athletes: params[:max_athletes], location: params[:location], sport_id: params[:sport_id], user_id: current_user.id)
+        address = params[:address]
+        coordinates = Geocoder.coordinates(address)
+        new_event = Event.create(
+            title: params[:title], 
+            description: params[:description], 
+            image_url: params[:image_url], 
+            beg_time: params[:beg_time], 
+            end_time: params[:end_time], 
+            max_athletes: params[:max_athletes], 
+            latitude: coordinates[0], 
+            longitude: coordinates[1],  
+            sport_id: params[:sport_id], 
+            user_id: current_user.id)
  
 
         if new_event.save
@@ -48,6 +60,9 @@ class EventsController < ApplicationController
     end 
 
     def update
+        address = params[:address]
+        coordinates = Geocoder.coordinates(address)
+
         @event.update(
             title: params[:title], 
             description: params[:description], 
@@ -55,11 +70,14 @@ class EventsController < ApplicationController
             beg_time: params[:beg_time], 
             end_time: params[:end_time], 
             max_athletes: params[:max_athletes], 
-            location: params[:location], 
+            latitude: coordinates[0], 
+            longitude: coordinates[1],
             sport_id: params[:sport_id], 
             user_id: current_user.id
             )
-        if @event.update
+        @event.save
+
+        if @event.save
             redirect_to @event
         else
             render 'edit'

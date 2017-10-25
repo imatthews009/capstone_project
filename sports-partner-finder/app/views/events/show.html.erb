@@ -9,7 +9,12 @@
   <h1>Start time: <%=@event.beg_time %></h1>
   <h1>End time: <%=@event.end_time %></h1>
   <h1>Maximum number of athletes: <%=@event.max_athletes %></h1>
-  <h1>Location: <%=@event.location %></h1>
+
+
+  
+
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@event.latitude},#{@event.longitude}&markers=#{@event.latitude},#{@event.longitude}&zoom=14&size=640x400&key=AIzaSyDQR-ZAhzBk3Cr2QpF6K_vZNjowRihnN6k",
+              class: 'img-fluid img-rounded', alt: "#{@event.title} on the map"%>
   <h1>Athletes Attending: 
     <ol>
     <%@event.users.each do |user| %>
@@ -22,8 +27,8 @@
   
 </div>
 
-<%= button_to 'join', join_event_path(@event) %> <br>
-<%= button_to 'leave', leave_event_path(@event) %> <br>
+<%= link_to 'join', '/events/'+ params[:id] + '/join' %> <br>
+<%= link_to 'leave', '/events/'+ params[:id] + '/leave' %> <br>
 
 
 <%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you sure you would like to delete?"}%>

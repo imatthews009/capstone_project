@@ -1,0 +1,7 @@
+class RemoveLocationFromEvents < ActiveRecord::Migration[5.1]
+  def change
+    remove_column :events, :location, :string
+    add_column :events, :latitude, :float
+    add_column :events, :longitude, :float
+  end
+end

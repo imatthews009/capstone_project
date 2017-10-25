@@ -1,4 +1,4 @@
-<%= form_tag '/events', method: :post do %>
+<%= form_tag @event, method: :patch do %>
     
     <div>
         <%= label_tag :title %> <br>
@@ -31,8 +31,8 @@
     </div>
 
     <div>
-        <%= label_tag :location %> <br>
-        <%= text_field_tag :location, @event.location %>
+        <%= label_tag :address %> <br>
+        <%= text_field_tag :address %>
     </div>
 
     <div class="field">
