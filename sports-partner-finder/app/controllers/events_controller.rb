@@ -49,8 +49,12 @@ class EventsController < ApplicationController
 
     def join
         @event = Event.find_by(id: params[:id])
-        @userevent = UserEvent.create(event_id: params[:id], user_id: current_user.id)
-        redirect_to @event 
+        if @event.users.count < @event.max_athletes
+            @userevent = UserEvent.create(event_id: params[:id], user_id: current_user.id)
+            redirect_to @event 
+        else
+            redirect_to '/events/' + params[:id], alert: "Maximum athletes reached"
+        end
         p @event.errors.full_messages
     end
 
