@@ -4,7 +4,7 @@ class EventsController < ApplicationController
     before_action :end_date, only:[:create, :update]
 
     def index
-        @events = Event.all
+        @events = Event.where("beg_time >= ?", Time.now)
         sort_att = params[:sort]
         if sort_att
             sport = Sport.all.find(params[:sort])
