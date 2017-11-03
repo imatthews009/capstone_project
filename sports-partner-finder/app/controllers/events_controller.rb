@@ -10,6 +10,12 @@ class EventsController < ApplicationController
             sport = Sport.all.find(params[:sort])
             @events = sport.events
         end
+
+        @hash = Gmaps4rails.build_markers(@events) do |event, marker|
+          marker.lat event.latitude
+          marker.lng event.longitude
+          marker.infowindow event.title
+        end
     end
 
     def new
@@ -49,11 +55,11 @@ class EventsController < ApplicationController
 
     def join
         @event = Event.find_by(id: params[:id])
-        if @event.users.count < @event.max_athletes
+        if @event.users.count < @event.max_athletes 
             @userevent = UserEvent.create(event_id: params[:id], user_id: current_user.id)
             redirect_to @event 
         else
-            redirect_to '/events/' + params[:id], alert: "Maximum athletes reached"
+            redirect_to '/events/' + params[:id], alert: "Maximum athletes reached or you are already attending"
         end
         p @event.errors.full_messages
     end

@@ -13,6 +13,13 @@
     <%= f.text_field :city %>
   </div>   
 
+<!-- test -->
+
+<%= f.label :state %><br />    
+<%= select_tag :state, options_for_select(CS.states(:us).map { |arr| [arr[1], arr[0]] }) %>
+
+<!--   end test -->
+
   <div class="field">
     <%= f.label :profile_url %><br />
     <%= f.text_field :profile_url %>

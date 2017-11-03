@@ -15,10 +15,7 @@
         <%= text_field_tag :image_url %>
     </div>
 
-<!--     <div>
-        <%= label_tag :event_start_time %> <br>
-        <%= date_select :beg_date, order: [:month, :day, :year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 18, end_year: Date.today.year - 100 %>
-    </div> -->
+
     <div>
         <%= label_tag :event_start_time %> <br>
         <%= datetime_select(:beg_date, :beg_time) %>
