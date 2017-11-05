@@ -6,9 +6,14 @@ class EventsController < ApplicationController
     def index
         @events = Event.where("beg_time >= ?", Time.now)
         sort_att = params[:sort]
+        sort_week_att = params[:week]
         if sort_att
             sport = Sport.all.find(params[:sort])
-            @events = sport.events
+            @events = sport.events.where("beg_time >= ?", Time.now)
+        end
+
+        if sort_week_att
+            @events = Event.where("beg_time BETWEEN ? AND ?", DateTime.now, DateTime.now + params[:week].to_i)
         end
 
         @hash = Gmaps4rails.build_markers(@events) do |event, marker|

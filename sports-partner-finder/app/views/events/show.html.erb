@@ -2,20 +2,12 @@
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
  
+
 <div class="col-3">
   <img src="<%=@event.image_url%>" alt="event Image" style="width:100px;"> 
 </div>
-<div class="col-6 event_information">
-  <h1>Title: <%=@event.title %></h1>
-  <h1>Description: <%=@event.description %></h1>
-  <h1>Start time: <%=@event.beg_time.strftime('%A, %d %b %Y %l:%M %p') %></h1>
-  <h1>End time: <%=@event.end_time.strftime('%A, %d %b %Y %l:%M %p') %></h1>
-  <h1>Maximum number of athletes: <%=@event.max_athletes %></h1>
-  <h1>Location name: <%=@event.location %></h1>
 
-
-  
-
+<!-- Google map -->
 <div style='width: 800px;'>
   <div id="map" style='width: 800px; height: 400px;'>
     <script>
@@ -42,6 +34,17 @@
   </script>
   </div>
 </div>
+<!-- End of Google map -->
+
+
+<div class="col-6 event_information">
+  <h1>Title: <%=@event.title %></h1>
+  <h1>Description: <%=@event.description %></h1>
+  <h1>Start time: <%=@event.beg_time.strftime('%A, %d %b %Y %l:%M %p') %></h1>
+  <h1>End time: <%=@event.end_time.strftime('%A, %d %b %Y %l:%M %p') %></h1>
+  <h1>Maximum number of athletes: <%=@event.max_athletes %></h1>
+  <h1>Location name: <%=@event.location %></h1>
+
 
   <h1>Athletes Attending: 
     <ol>

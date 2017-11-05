@@ -40,7 +40,11 @@ class RegistrationsController < Devise::RegistrationsController
             params[:sport_ids].each do |sport_id|
                 UserSport.create(user_id: current_user.id, sport_id: sport_id)
             end
-        end      
+        end 
+
+        if current_user.profile_url == ""  
+            current_user.update(profile_url: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png")
+        end     
     end
 
     def update

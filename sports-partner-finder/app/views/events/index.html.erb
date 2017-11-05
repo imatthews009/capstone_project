@@ -44,6 +44,13 @@
   <%= link_to 'Reset', '/events' %>
 </div>
 
+<div class="sort_by_week">
+  <h1>Sort by Date</h1>
+  <a href="/events?week=7">Events within the next 7 days</a>
+  <a href="/events?week=30">Events within the next 30 days</a>
+  <%= link_to 'Reset', '/events' %>
+</div>
+
 <% @events.each do |event| %>
   <div class="row" onclick="javascript:location.href='/events/<%=event.id%>'" style="border: 1px solid black;">
     <div class="col-3">
