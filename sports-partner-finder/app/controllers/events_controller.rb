@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-    before_action :find_event, only:[:show, :edit,:update, :destroy]
+    before_action :find_event, only:[:show, :edit, :update, :destroy]
     before_action :beg_date, only:[:create, :update]
     before_action :end_date, only:[:create, :update]
 
@@ -30,7 +30,7 @@ class EventsController < ApplicationController
     def create
         address = params[:address]
         coordinates = Geocoder.coordinates(address)
-        new_event = Event.create(
+        new_event = Event.new(
             title: params[:title], 
             description: params[:description], 
             image_url: params[:image_url], 
@@ -43,6 +43,11 @@ class EventsController < ApplicationController
             address: params[:address], 
             sport_id: params[:sport_id], 
             user_id: current_user.id)
+
+        if new_event.image_url == ""
+            new_event.image_url = "https://www.belfercenter.org/themes/belfer/images/event-default-img-med.png" 
+            new_event.save
+        end
 
         if new_event.save
             redirect_to new_event
