@@ -9,6 +9,12 @@
     </a> 
   <% end %>
   <%= link_to 'Reset', root_path %>
+
+  <%= form_tag '/users', method: :get do %>
+
+    <%= select_tag(:city_name, options_from_collection_for_select(@users.to_a.uniq{ |o| o.city}, :city, :city), :multiple => false) %>
+    <%= submit_tag 'Filter by City' %>
+  <% end %>
 </div>
 
 

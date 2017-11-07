@@ -34,6 +34,7 @@
   </div>
 </div>
 
+<!-- Events sorting -->
 <div class='circle-images'>
   <h1>Sort by sport</h1>
   <% Sport.all.each do |sport| %>
@@ -42,6 +43,12 @@
     </a> 
   <% end %>
   <%= link_to 'Reset', '/events' %>
+
+  <%= form_tag '/events', method: :get do %>
+
+    <%= select_tag(:city_name, options_from_collection_for_select(@events.to_a.uniq{ |o| o.city}, :city, :city), :multiple => false) %>
+    <%= submit_tag 'Filter by City' %>
+  <% end %>
 </div>
 
 <div class="sort_by_week">
@@ -51,6 +58,7 @@
   <%= link_to 'Reset', '/events' %>
 </div>
 
+<!-- End of Events sorting -->
 <% @events.each do |event| %>
   <div class="row" onclick="javascript:location.href='/events/<%=event.id%>'" style="border: 1px solid black;">
     <div class="col-3">
@@ -61,6 +69,7 @@
       <h1>Description: <%=event.description %></h1>
       <h1>Start time: <%=event.beg_time.strftime('%A, %d %b %Y %l:%M %p') %></h1>
       <h1>End time: <%=event.end_time.strftime('%A, %d %b %Y %l:%M %p') %></h1>
+      <h1>City: <%=event.city %></h1>
       <h1>Maximum number of athletes: <%=event.max_athletes %></h1>
       <h2>Number of athletes attending</h2>
       <ul>

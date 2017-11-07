@@ -40,6 +40,9 @@ class RegistrationsController < Devise::RegistrationsController
             params[:sport_ids].each do |sport_id|
                 UserSport.create(user_id: current_user.id, sport_id: sport_id)
             end
+
+            updated_city = resource.city.split.map(&:capitalize).join(' ')
+            resource.update(city: updated_city)
         end 
 
         if current_user.profile_url == ""  

@@ -5,9 +5,22 @@ class UsersController < ApplicationController
     def index
         @users = User.all 
         sort_att = params[:sort] 
+        sort_city = params['city_name']
+        p 'test'
+        p params['city_input']
         if sort_att
             sport = Sport.all.find(params[:sort])
             @users = sport.users
+        end
+
+        if sort_city
+            p 'test'
+            p params['city_name']
+            @users = @users.where(city: params["city_name"])
+        end
+        @cities = []
+        @users.each do |user|
+            @cities << user.city
         end
     end
 

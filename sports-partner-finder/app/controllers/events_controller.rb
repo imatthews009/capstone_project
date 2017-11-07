@@ -16,6 +16,13 @@ class EventsController < ApplicationController
             @events = Event.where("beg_time BETWEEN ? AND ?", DateTime.now, DateTime.now + params[:week].to_i)
         end
 
+        sort_city = params['city_name']
+        if sort_city
+            p 'test'
+            p params['city_name']
+            @events = @events.where(city: params["city_name"])
+        end
+
         @hash = Gmaps4rails.build_markers(@events) do |event, marker|
           marker.lat event.latitude
           marker.lng event.longitude
@@ -29,8 +36,18 @@ class EventsController < ApplicationController
 
     def create
         address = params[:address]
+        # only allow correctly spelled cities
         coordinates = Geocoder.coordinates(address)
-        new_event = Event.new(
+        updated_city = params[:city].split.map(&:capitalize).join(' ')
+        count = 0
+        CS.cities(params[:state], :us).each do |city_in_selected_state|
+            if params[:city].to_s.downcase == city_in_selected_state.downcase
+                count += 1
+            end
+        end
+        # only allow correctly spelled cities end
+        if count > 0
+            new_event = Event.new(
             title: params[:title], 
             description: params[:description], 
             image_url: params[:image_url], 
@@ -39,10 +56,16 @@ class EventsController < ApplicationController
             max_athletes: params[:max_athletes], 
             latitude: coordinates[0], 
             longitude: coordinates[1],
-            location: params[:location], 
+            location: params[:location],
+            city: updated_city,
             address: params[:address], 
             sport_id: params[:sport_id], 
             user_id: current_user.id)
+        else
+            redirect_to '/events/new',notice: 'city spelled incorrectly' and return
+        end
+
+        
 
         if new_event.image_url == ""
             new_event.image_url = "https://www.belfercenter.org/themes/belfer/images/event-default-img-med.png" 
@@ -88,7 +111,7 @@ class EventsController < ApplicationController
         
         address = params[:address]
         coordinates = Geocoder.coordinates(address)
-
+        updated_city = params[:city].split.map(&:capitalize).join(' ')
         @event.update(
             title: params[:title], 
             description: params[:description], 
@@ -99,6 +122,7 @@ class EventsController < ApplicationController
             latitude: coordinates[0], 
             longitude: coordinates[1],
             location: params[:location],
+            city: updated_city,
             address: params[:address],
             sport_id: params[:sport_id], 
             user_id: current_user.id
