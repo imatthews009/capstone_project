@@ -11,6 +11,7 @@ class User < ApplicationRecord
     has_many :events #attended events
 
     has_many :messages
+    has_many :comments
     has_many :subscriptions
     has_many :chats, through: :subscriptions
     def existing_chats_users

@@ -70,3 +70,18 @@
 
 
 <%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you sure you would like to delete?"}%>
+
+<% @comments.each do |comment| %>
+  <h2 class="event_comments"><%=current_user.username%>: <%=comment.text%></h2>
+<% end %>
+
+
+
+
+<%= form_for(Comment.new, url: comments_path, method: :post) do |f| %>
+  <%= label_tag :comment %>
+  <%= text_field_tag :text %>
+  <%= f.hidden_field :event_id, :value => @event.id %>
+  <%= submit_tag 'Submit Comment' %>
+
+<% end %>

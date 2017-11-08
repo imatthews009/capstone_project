@@ -61,22 +61,21 @@ class EventsController < ApplicationController
             address: params[:address], 
             sport_id: params[:sport_id], 
             user_id: current_user.id)
+
+            if new_event.image_url == ""
+                new_event.image_url = "https://www.belfercenter.org/themes/belfer/images/event-default-img-med.png" 
+                new_event.save
+            end
+
+            if new_event.save
+                redirect_to new_event
+            else
+                render 'new'
+            end
         else
             redirect_to '/events/new',notice: 'city spelled incorrectly' and return
         end
 
-        
-
-        if new_event.image_url == ""
-            new_event.image_url = "https://www.belfercenter.org/themes/belfer/images/event-default-img-med.png" 
-            new_event.save
-        end
-
-        if new_event.save
-            redirect_to new_event
-        else
-            render 'new'
-        end
     end
 
     def show
@@ -84,6 +83,9 @@ class EventsController < ApplicationController
           marker.lat event.latitude
           marker.lng event.longitude
         end
+
+        @comments = @event.comments
+
     end
 
     def join

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :user_events, only: [:destroy]
 
   resources :messages, only:[:create]
+  resources :comments, only: [:create, :update, :destroy]
 
 
 
