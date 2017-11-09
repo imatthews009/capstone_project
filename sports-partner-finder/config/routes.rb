@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :messages, only:[:create]
   resources :comments, only: [:create, :update, :destroy]
 
-
+  resources :news, only: [:index]
 
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
