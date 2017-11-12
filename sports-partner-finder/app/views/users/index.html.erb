@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 ">
-        <div class="bg-search-white" style="transform: none; position: static; left:0%">
+        <div class="bg-search-white" style="transform: none; position: static; left:0%; margin-top: 70px;">
           <form class="form-inline" action="/users" method="get">
             <div class="form-group" style="width: 30%;">
               <div class="searchSelectbox">
@@ -38,37 +38,65 @@
 </section>
 
 
+<section class="clerfix">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-xs-12">
+        <div class="resultBar barSpaceAdjust">
+          <h2>We found <span><%=@users_sort.count %></span> Results for you</h2>
+        </div>
+        <% @users_sort.each do |user|%>
+        <div class="listContent">
+          <div class="row">
+            <div class="col-sm-5 col-xs-12">
+              <div class="categoryImage">
+                <img src="<%=user.profile_url%>" alt="Image category" class="img-responsive img-rounded" style="width: 350px;">
+              </div>
+            </div>
+            <div class="col-sm-7 col-xs-12">
+              <div class="categoryDetails">
+                <h2><a href="/users/<%=user.id%>" style="color: #222222"><b><%=user.username %></b></a></h2>
+                <p><b>City:</b> <%=user.city %></p>
+                <p><b>Sports:</b> <% user.sports.each do |sport| %>
+                  <ul>
+                    <li><%= sport.name %> </li>
+                  </ul>
+                  <% end %>
+                </p>
+                <p><b>Chat with:</b> <%= button_to(user_chats_path(current_user, :user => user.id), method: :post, :class => 'btn btn-primary', :style => "width: 130px;") do %>
+                  <%= user.username %>
+                  <% end %>             
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
 
 
-
-
-
-<div class="users_index">
-  <% @users_sort.each do |user|%>
-  <% if user.id != current_user.id %>
-  <div class="row" style="border: 1px solid black;">
-    <div class="col-3">
-      <img onclick="javascript:location.href='users/<%=user.id%>'" src="<%=user.profile_url%>" alt="User Image" style="width:100px;"> 
+          <div class="paginationCommon blogPagination categoryPagination">
+            <nav aria-label="Page navigation">
+              <ul class="pagination">
+                <li>
+                  <a href="#" aria-label="Previous">
+                    <span aria-hidden="true"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+                  </a>
+                </li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-6 user_information">      
-        <h1>Username: <%=user.username %></h1>
-        <h1>City: <%=user.city %></h1>
-        <h1>E-mail: <%=user.email %></h1>
-        <h1>Sports:
-          <ul>
-            <% user.sports.each do |sport| %>
-              <li><%=sport.name %></li>
-            <% end %>
-          </ul>
-        </h1>
-        <h1> 
-            Chat with: <%= button_to(user_chats_path(current_user, :user => user.id), method: :post) do %>
-            <%= user.username %>
-            <% end %>
-        </h1>     
-    </div>
-  </div>
-  <% end %>
-  <% end %> 
-</div>
+  </section>
 

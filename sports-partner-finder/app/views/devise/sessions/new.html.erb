@@ -1,26 +1,46 @@
-<h2>Log in</h2>
+<section class="clearfix loginSection">
+  <div class="container">
+    <div class="row">
+      <div class="center-block col-md-5 col-sm-6 col-xs-12">
+        <div class="panel panel-default loginPanel">
+          <div class="panel-heading text-center">Members log in</div>
+          <div class="panel-body">
+<!--             <form class="loginForm"> -->
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form-group") do |f| %>
+              <div class="form-group" style="float: none;">
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autofocus: true, :class => "form-control" %>
+              </div>
+              <br>
+              <div class="form-group" style="float: none;">
+                <%= f.label :password %><br />
+                <%= f.password_field :password, autocomplete: "off" %>
+              </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+              <br>
+              
+              <% if devise_mapping.rememberable? -%>              
+                <div class="form-group" style="float: none;">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+              <div class="form-group" style="float: none;">
+                <%= f.submit "Log in", :class => "btn btn-primary pull-left", :style => "width: 100px;" %>
+              </div>
+            <% end %>
+<!--             </form> -->
+          </div>
+          <div class="panel-footer text-center">
+            <p>Not a member yet? <%= render "devise/shared/links" %></p>
+
+          </div>
+        </div>
+      </div>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</section>
 
-<%= render "devise/shared/links" %>
+
