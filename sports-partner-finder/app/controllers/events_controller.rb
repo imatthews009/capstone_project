@@ -5,29 +5,32 @@ class EventsController < ApplicationController
 
     def index
         @events = Event.where("beg_time >= ?", Time.now)
-        sort_att = params[:sort]
+        sort_att = params[:sport]
         sort_week_att = params[:week]
         if sort_att
-            sport = Sport.all.find(params[:sort])
-            @events = sport.events.where("beg_time >= ?", Time.now)
+            @events = @events.where(city: params["city_name"])
+            @events = @events.where(sport: params[:sport])
+            @events = @events.where("beg_time >= ?", Time.now) 
         end
 
         if sort_week_att
             @events = Event.where("beg_time BETWEEN ? AND ?", DateTime.now, DateTime.now + params[:week].to_i)
         end
 
-        sort_city = params['city_name']
-        if sort_city
-            p 'test'
-            p params['city_name']
-            @events = @events.where(city: params["city_name"])
-        end
+        # sort_city = params['city_name']
+        # if sort_city
+        #     p 'test'
+        #     p params['city_name']
+        #     @events = @events.where(city: params["city_name"])
+        # end
 
         @hash = Gmaps4rails.build_markers(@events) do |event, marker|
           marker.lat event.latitude
           marker.lng event.longitude
           marker.infowindow event.title
         end
+
+        @unique_events = @events.to_a.uniq{ |o| o.city}
     end
 
     def new

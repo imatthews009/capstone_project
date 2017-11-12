@@ -195,9 +195,6 @@ a {
 .main-wrapper {
   position: relative; }
 
-.changeBlack {
-  color: black !important;
-}
 .form-control:focus {
   box-shadow: none; }
 
@@ -5792,7 +5789,5 @@ body.rtl .locationSelect .sbToggle {
   left: 10px; }
 body.rtl .checkbox .pull-right.link {
   float: left !important; }
-
-
 
 /*# sourceMappingURL=style.css.map */
