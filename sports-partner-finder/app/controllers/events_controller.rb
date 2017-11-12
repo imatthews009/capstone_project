@@ -17,13 +17,6 @@ class EventsController < ApplicationController
             @events = Event.where("beg_time BETWEEN ? AND ?", DateTime.now, DateTime.now + params[:week].to_i)
         end
 
-        # sort_city = params['city_name']
-        # if sort_city
-        #     p 'test'
-        #     p params['city_name']
-        #     @events = @events.where(city: params["city_name"])
-        # end
-
         @hash = Gmaps4rails.build_markers(@events) do |event, marker|
           marker.lat event.latitude
           marker.lng event.longitude

@@ -1,28 +1,50 @@
+<!-- End of Events sorting -->
+<section class="clearfix bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 ">
+        <div class="bg-search-white" style="transform: none; position: static; left:0%">
+          <form class="form-inline" action="/users" method="get">
+            <div class="form-group" style="width: 30%;">
+              <div class="searchSelectbox">
+                <select name="sport" id="sport" class="select-drop">
+                  <% Sport.all.each do |sport| %>
+                  <option value="<%= sport.id%>"><%=sport.name%></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="width: 30%;">
+              <div class="searchSelectbox">
+                <select name="city_name" id="city_name" class="select-drop">
+                  <% @unique_users.each do |event| %>
+                    <option value="<%= event.city %>"><%=event.city%></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="width: 31%;">
+              <div class="btn-group" style="text-align:center"></div>
+              <button type="submit" class="btn btn-primary pull-right text-nowrap" style="width: 40%;">Filter</button>
+              <button type="button" class="btn btn-primary pull-left text-nowrap" onclick="location.href='/';" value="Reset" style="width: 40%;">Reset</button>
+              </div>
+            </div>
 
-<br>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div class='circle-images'>
-  <h1>Sort by sport</h1>
-  <% Sport.all.each do |sport| %>
-    <a class="circle-image" href="/users?sort=<%=sport.id%>">
-      <img src="<%=sport.image_url%>" alt="sport.name">
-    </a> 
-  <% end %>
-  <%= link_to 'Reset', root_path %>
 
-  <%= form_tag '/users', method: :get do %>
-
-    <%= select_tag(:city_name, options_from_collection_for_select(@users.to_a.uniq{ |o| o.city}, :city, :city), :multiple => false) %>
-    <%= submit_tag 'Filter by City' %>
-  <% end %>
-</div>
 
 
 
 
 
 <div class="users_index">
-  <% @users.each do |user|%>
+  <% @users_sort.each do |user|%>
   <% if user.id != current_user.id %>
   <div class="row" style="border: 1px solid black;">
     <div class="col-3">
