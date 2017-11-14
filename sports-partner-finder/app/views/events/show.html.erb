@@ -34,98 +34,82 @@
 <!-- End of Google map -->
 
 <section class="clearfix bg-dark profileSection">
-    <div class="container">
-        <div class="row" style="margin-top: 100px;">
-            <div class="col-md-4 col-sm-5 col-xs-12">
-                <div class="dashboardBoxBg mb30">
-                    <div class="profileImage">
-                        <img src="<%=@user.profile_url%>" alt="Image User" class="img-circle" style="width: 150px">
-                        <br>
-                        <% if current_user.id.to_s == params[:id].to_s%>
-                            <%= link_to "Edit User", edit_user_registration_path %>
-                        <% end %>
-                        <br>
-                        <b>Chat with:</b> 
-                        <%= button_to(user_chats_path(current_user, :user => @user.id), method: :post, :class => 'btn btn-primary') do %>
-                            <%= @user.username %>
-                        <% end %>             
-                        
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8 col-sm-7 col-xs-12">
-                <div class="dashboardBoxBg">
-                    <div class="profileIntro">
-                        <h2><%=@user.username%>'s  Profile</h2>
-                    </div>
-                </div>
-
-                <div class="dashboardBoxBg mt30">
-                    <div class="profileIntro">
-                        <div class="row">
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <h4>Username</h4>
-                                <h5><%=current_user.username%></h5>
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <h4>City</h4>
-                                <h5><%=current_user.city%></h5>
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <h4>E-mail</h4>
-                                <h5><%=current_user.email%></h5>
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <h4>Sports</h4>
-                                <% @user.sports.each do |sport| %>
-                                    <h5><%=sport.name%></h5>
-                                <% end %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row" style="margin-top: 100px;">
+      <div class="col-md-4 col-sm-5 col-xs-12">
+        <div class="dashboardBoxBg mb30">
+          <div class="profileImage">
+            <img src="<%=@event.image_url%>" alt="Image User" class="img-circle" style="width: 150px">
+            <br>
+            <% if current_user.id.to_s == @event.user.id.to_s%>
+                <%= link_to "Edit Event", edit_event_path %>
+                <br>
+                <%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you sure you would like to delete?"}%>
+            <% end %>   
+                                
+          </div>
         </div>
+      </div>
+      <div class="col-md-8 col-sm-7 col-xs-12">
+        <div class="dashboardBoxBg">
+          <div class="profileIntro">
+              <h2><%=@event.title%></h2>
+          </div>
+        </div>
+
+        <div class="dashboardBoxBg mt30">
+          <div class="profileIntro">
+            <div class="row">
+              <div class="form-group col-sm-12 col-xs-12">
+                <h4>Description</h4>
+                <h5><%=@event.description %></h5>
+              </div>
+              <div class="form-group col-sm-6 col-xs-12">
+                <h4>Start Time</h4>
+                <h5><%=@event.beg_time.strftime('%A, %d %b %Y %l:%M %p') %></h5>
+              </div>
+              <div class="form-group col-sm-6 col-xs-12">
+                <h4>End Time</h4>
+                <h5><%=@event.end_time.strftime('%A, %d %b %Y %l:%M %p') %></h5>
+              </div>
+              <div class="form-group col-sm-6 col-xs-12">
+                <h4>Maximum number of athletes</h4>
+                <h5><%=@event.max_athletes %></h5>
+              </div>
+              <div class="form-group col-sm-6 col-xs-12">
+                <h4>Location Name</h4>
+                <h5><%=@event.location %></h5>
+              </div>
+              <div class="form-group col-sm-6 col-xs-12">
+                <h4>City</h4>
+                <h5><%=@event.city %></h5>
+              </div>
+              <div class="form-group col-sm-6 col-xs-12">
+                <h4>Athletes Attending</h4>
+                <%@event.users.each do |user| %>                
+                  <h5><%= user.username %></h5>                
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% if @event.users.where(id: current_user.id).present? == false %>
+            <div>
+              <button class="btn btn-primary btn-lg" onClick="location.href='<%= '/events/'+ params[:id] + '/join'%>'" style="width: 100px;">Join Event</button>
+            </div>
+          <% end %>
+          <br>
+          <div>
+            <button class="btn btn-primary btn-lg" onClick="location.href='<%= '/events/'+ params[:id] + '/leave'%>'" style="width: 100px;">Leave Event</button>
+
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 
-<div class="col-3">
-  <img src="<%=@event.image_url%>" alt="event Image" style="width:100px;"> 
-</div>
 
-
-<div class="col-6 event_information">
-  <h1>Title: <%=@event.title %></h1>
-  <h1>Description: <%=@event.description %></h1>
-  <h1>Start time: <%=@event.beg_time.strftime('%A, %d %b %Y %l:%M %p') %></h1>
-  <h1>End time: <%=@event.end_time.strftime('%A, %d %b %Y %l:%M %p') %></h1>
-  <h1>Maximum number of athletes: <%=@event.max_athletes %></h1>
-  <h1>Location name: <%=@event.location %></h1>
-  <h1>City: <%=@event.city %></h1>
-
-
-  <h1>Athletes Attending: 
-    <ol>
-    <%@event.users.each do |user| %>
-    
-        <li><%= user.username %></li>
-    
-    <% end %>
-    </ol>
-</h1>
-  
-</div>
-
-
-<% if @event.users.where(id: current_user.id).present? == false %>
-  <%= link_to 'join', '/events/'+ params[:id] + '/join' %> <br>
-<% end %>
-<%= link_to 'leave', '/events/'+ params[:id] + '/leave' %> <br>
-
-
-<%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you sure you would like to delete?"}%>
 
 <% @comments.each do |comment| %>
   <h2 class="event_comments"><%=current_user.username%>: <%=comment.text%></h2>
