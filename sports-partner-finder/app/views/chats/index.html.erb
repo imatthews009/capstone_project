@@ -1,26 +1,44 @@
-Current Chats:
-<ul>
- <% if @existing_chats_users %>
-   <% @existing_chats_users.each do |user| %>
-    <% if user != current_user %>
-      <li>
-        <%= link_to(user_chats_path(current_user, :user => user.id), method: :post) do %>
-        <%= user.username %>
-        <% end %>
-      </li>
-     <% end %>
-   <% end %>
-  <% end %>
-</ul>
-All Users:
-<ul>
-  <% User.all.each do |user| %>
-   <% if user != current_user %>
-     <li>
-       <%= link_to(user_chats_path(current_user, :user => user.id), method: :post) do %>
-       <%= user.username %>
-       <% end %>
-     </li>
-    <% end %>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="chats" style="margin: 135px auto 0 auto; text-align: center; ">
+        <h1>Current Chats:</h1>
+        <ul>
+         <% if @existing_chats_users %>
+           <% @existing_chats_users.each do |user| %>
+            <% if user != current_user %>
+              <li style="border-bottom: 1px solid; width: 30%; margin: 0 auto; text-align: center">
+                <%= link_to(user_chats_path(current_user, :user => user.id), method: :post) do %>
+                  Username: <%= user.username %>
+                  <% user.sports.each do |sport|%>
+                  <ul>
+                    <li style="margin-left: 15px;">Sport: <%= sport.name %></li>
+                  </ul>
+                  <% end %>
+                <% end %>
+              </li>
+             <% end %>
+           <% end %>
+          <% end %>
+        </ul>
+        <h1>All Users:</h1>
+        <ul>
+          <% User.all.each do |user| %>
+           <% if user != current_user %>
+             <li style="border-bottom: 1px solid; width: 30%; margin: 0 auto; text-align: center">
+               <%= link_to(user_chats_path(current_user, :user => user.id), method: :post) do %>
+                 Username: <%= user.username %>
+                 <%user.sports.each do |sport|%>
+                 <ul>
+                   <li style="margin-left: 15px;">Sport: <%= sport.name %></li>
+                 </ul>
+               <% end %>
+               <% end %>
+             </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,15 +1,23 @@
-<div>
-  <h5>Chat with <%= @other_user.username %></h5>
-  <% if @chat.messages.any? %>
-    <div id="messages">
-      <%= render partial: 'messages/message', collection: @chat.messages.order(id: :asc)%>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div style="margin-top: 150px;">
+        <h5>Chat with <%= @other_user.username %></h5>
+        <% if @chat.messages.any? %>
+          <div id="messages" style="margin: 5px">
+            <%= render partial: 'messages/message', collection: @chat.messages.order(id: :asc)%>
+          </div>
+        <%else%>
+          <div id="messages">
+          </div>
+        <%end%>
+      </div>
+      <div class="messageBox" >
+        <%= render partial: 'messages/message_form', locals: {message: @message, chat: @chat}%>
+      </div>
+      </div>
     </div>
-  <%else%>
-    <div id="messages">
-    </div>
-  <%end%>
-</div>
-<%= render partial: 'messages/message_form', locals: {message: @message, chat: @chat}%>
+  </div>
 </div>
 <script>
   createMessageChannel();

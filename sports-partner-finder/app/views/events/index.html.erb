@@ -102,69 +102,14 @@
                   <p>Start time: <%=event.beg_time.strftime('%A, %d %b %Y %l:%M %p') %></p>
                   <p>End time: <%=event.end_time.strftime('%A, %d %b %Y %l:%M %p') %></p>
                   <p>Maximum number of athletes: <%=event.max_athletes %></p>
-                  <p>Number of athletes attending</p>
-                  <p>Maximum number of athletes:</p>
-                    <ul>
-                      <li><%= event.users.count%> / <%= event.max_athletes%></li>
-                    </ul>
+                  <p>Number of athletes attending: <%= event.users.count%> / <%= event.max_athletes%></p>
                   <p>Sport: <%=event.sport.name %></p>
                 </div>
               </div>
             </div>
           </div>
         <% end %>
-        <!-- <div class="row">
-          <div class="col-sm-4 com-xs-12">
-            <div class="sidebarInner sidebarCategory mt20 pull-left">
-              <div class="panel panel-default">
-                <div class="panel-heading">Find Location</div>
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="What are you looking for?" aria-describedby="basic-addon2">
-                  <a href="#" class="input-group-addon" id="basic-addon2"><i class="fa fa-search" aria-hidden="true"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4 com-xs-12">
-            <div class="sidebarInner sidebarCategory mt20 pull-left">
-              <div class="panel panel-default">
-                <div class="panel-heading">Filter by Area</div>
-                <div class="panel-body">
-                  <ul class="list-unstyle categoryList">
-                    <li><a href="#">Dhaka</a></li>
-                    <li><a href="#">Chittagong</a></li>
-                    <li><a href="#">Rajshahi</a></li>
-                    <li><a href="#">Khulna</a></li>
-                    <li><a href="#">Barisal</a></li>
-                    <li><a href="#">Sylhet</a></li>
-                    <li><a href="#">Rangpure</a></li>
-                    <li><a href="#">Gazipure</a></li>
-                    <li><a href="#">Pabna</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4 com-xs-12">
-            <div class="sidebarInner sidebarCategory mt20 pull-left">
-              <div class="panel panel-default">
-                <div class="panel-heading">Related Categories</div>
-                <div class="panel-body">
-                  <ul class="list-unstyle categoryList">
-                    <li><a href="#">Fast food</a></li>
-                    <li><a href="#">Chinese restaurants</a></li>
-                    <li><a href="#">Creole restaurants</a></li>
-                    <li><a href="#">Seafood</a></li>
-                    <li><a href="#">Thai restaurants</a></li>
-                    <li><a href="#">Street food</a></li>
-                    <li><a href="#">Japanese restaurants</a></li>
-                    <li><a href="#">Greek restaurants</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
+      
 
         <div class="paginationCommon blogPagination categoryPagination">
           <nav aria-label="Page navigation">
