@@ -38,17 +38,16 @@
     <div class="row" style="margin-top: 100px;">
       <div class="col-md-4 col-sm-5 col-xs-12">
         <div class="dashboardBoxBg mb30">
-          <div class="profileImage">
-            <img src="<%=@event.image_url%>" alt="Image User" class="img-circle" style="width: 150px">
-            <br>
-            <% if current_user.id.to_s == @event.user.id.to_s%>
-                <%= link_to "Edit Event", edit_event_path %>
-                <br>
-                <%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you sure you would like to delete?"}%>
-            <% end %>   
+          <div  style="width: 300px; height: 300px; position: relative; overflow: hidden; border-radius: 100%;">
+            <img src="<%=@event.image_url%>" alt="Image User"  style=" display: inline; margin: 0 auto; height: 100%; width: auto; text-align: center; left:80px;"> 
                                 
           </div>
-        </div>
+          <% if current_user.id.to_s == @event.user.id.to_s%>
+              <%= link_to "Edit Event", edit_event_path %>
+              <br>
+              <%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you sure you would like to delete?"}%>
+          <% end %>
+        </div>  
       </div>
       <div class="col-md-8 col-sm-7 col-xs-12">
         <div class="dashboardBoxBg">
@@ -62,32 +61,32 @@
             <div class="row">
               <div class="form-group col-sm-12 col-xs-12">
                 <h4>Description</h4>
-                <h5><%=@event.description %></h5>
+                <h5 style="color: #969493"><%=@event.description %></h5>
               </div>
               <div class="form-group col-sm-6 col-xs-12">
                 <h4>Start Time</h4>
-                <h5><%=@event.beg_time.strftime('%A, %d %b %Y %l:%M %p') %></h5>
+                <h5 style="color: #969493"><%=@event.beg_time.strftime('%A, %d %b %Y %l:%M %p') %></h5>
               </div>
               <div class="form-group col-sm-6 col-xs-12">
                 <h4>End Time</h4>
-                <h5><%=@event.end_time.strftime('%A, %d %b %Y %l:%M %p') %></h5>
+                <h5 style="color: #969493"><%=@event.end_time.strftime('%A, %d %b %Y %l:%M %p') %></h5>
               </div>
               <div class="form-group col-sm-6 col-xs-12">
                 <h4>Maximum number of athletes</h4>
-                <h5><%=@event.max_athletes %></h5>
+                <h5 style="color: #969493"><%=@event.max_athletes %></h5>
               </div>
               <div class="form-group col-sm-6 col-xs-12">
                 <h4>Location Name</h4>
-                <h5><%=@event.location %></h5>
+                <h5 style="color: #969493"><%=@event.location %></h5>
               </div>
               <div class="form-group col-sm-6 col-xs-12">
                 <h4>City</h4>
-                <h5><%=@event.city %></h5>
+                <h5 style="color: #969493"><%=@event.city %></h5>
               </div>
               <div class="form-group col-sm-6 col-xs-12">
                 <h4>Athletes Attending</h4>
                 <%@event.users.each do |user| %>                
-                  <h5><%= user.username %></h5>                
+                  <h5 style="color: #969493"><%= user.username %></h5>                
                 <% end %>
               </div>
             </div>
@@ -103,6 +102,23 @@
 
           </div>
         </div>
+        <div class="dashboardBoxBg" style="margin-top: 50px;">
+          <div class="profileIntro">
+            <h2>Comments</h2>
+            <hr style="display: block;margin-top: 0.5em; margin-bottom: 2em; margin-left: 4.5em; border-style: inset; border-width: 1px; width: 5%;">
+            <% @comments.each do |comment| %>
+              <h4 class="event_comments"><%=current_user.username%>: <%=comment.text%></h4>
+            <% end %>
+
+            <%= form_for(Comment.new, url: comments_path, method: :post) do |f| %>
+              <%= label_tag :comment %>
+              <%= text_field_tag :text %>
+              <%= f.hidden_field :event_id, :value => @event.id %>
+              <%= submit_tag 'Submit Comment' %>
+
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -111,17 +127,3 @@
 
 
 
-<% @comments.each do |comment| %>
-  <h2 class="event_comments"><%=current_user.username%>: <%=comment.text%></h2>
-<% end %>
-
-
-
-
-<%= form_for(Comment.new, url: comments_path, method: :post) do |f| %>
-  <%= label_tag :comment %>
-  <%= text_field_tag :text %>
-  <%= f.hidden_field :event_id, :value => @event.id %>
-  <%= submit_tag 'Submit Comment' %>
-
-<% end %>

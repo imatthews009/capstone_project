@@ -42,20 +42,20 @@
                         <div class="row">
                             <div class="form-group col-sm-6 col-xs-12">
                                 <h4>Username</h4>
-                                <h5><%=current_user.username%></h5>
+                                <h5 style="color: #969493"><%=current_user.username%></h5>
                             </div>
                             <div class="form-group col-sm-6 col-xs-12">
                                 <h4>City</h4>
-                                <h5><%=current_user.city%></h5>
+                                <h5 style="color: #969493"><%=current_user.city%></h5>
                             </div>
                             <div class="form-group col-sm-6 col-xs-12">
                                 <h4>E-mail</h4>
-                                <h5><%=current_user.email%></h5>
+                                <h5 style="color: #969493"><%=current_user.email%></h5>
                             </div>
                             <div class="form-group col-sm-6 col-xs-12">
                                 <h4>Sports</h4>
                                 <% @user.sports.each do |sport| %>
-                                    <h5><%=sport.name%></h5>
+                                    <h5 style="color: #969493"><%=sport.name%></h5>
                                 <% end %>
                             </div>
                         </div>
