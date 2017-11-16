@@ -107,7 +107,7 @@
             <h2>Comments</h2>
             <hr style="display: block;margin-top: 0.5em; margin-bottom: 2em; margin-left: 4.5em; border-style: inset; border-width: 1px; width: 5%;">
             <% @comments.each do |comment| %>
-              <h4 class="event_comments"><%=current_user.username%>: <%=comment.text%></h4>
+              <h4 class="event_comments"><%=comment.user.username%>: <%=comment.text%></h4>
             <% end %>
 
             <%= form_for(Comment.new, url: comments_path, method: :post) do |f| %>
