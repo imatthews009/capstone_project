@@ -5,8 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Sports.create( name: 'Tennis')
-Sports.create( name: 'Golf')
-Sports.create( name: 'Basketball')
-Sports.create( name: 'Badminton')
-Sports.create( name: 'Surfing')
+Sport.create( name: 'Tennis')
+Sport.create( name: 'Golf')
+Sport.create( name: 'Basketball')
+Sport.create( name: 'Badminton')
+Sport.create( name: 'Surfing')
