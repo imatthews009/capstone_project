@@ -219,11 +219,7 @@ DEPENDENCIES
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.1.4)
-<<<<<<< HEAD
   redis (~> 3.3)
-=======
-  redis (~> 3.0)
->>>>>>> e3d92d51575df5fb78ab2d7cc90904dfaa6b72b6
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
