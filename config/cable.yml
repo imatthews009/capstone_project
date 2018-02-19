@@ -6,5 +6,9 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  url: redis://redistogo:0b3bf4240b8979fe68ccc74e9cd65148@soldierfish.redistogo.com:11367/
+  host: soldierfish.redistogo.com
+  port: 11367 
+  password: 3aa3b70cb2c5e9c5095f58c0a0d430b10fe66c43d1e53135972f90d86a844ddf1a1166ea570c3e4e453e56bbd7d05db2c156f2eff00323779624d2eaf7d093f3
   channel_prefix: sports-partner-finder_production
+
